@@ -9,28 +9,24 @@
 
 <AnchorPane id="AnchorPane" prefHeight="368.0" prefWidth="500.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="FXMLDocumentController">
     <children>
-        <Button id="add" fx:id="button" layoutX="152.0" layoutY="307.0" onAction="#handleButtonAction" text="Add" />
-
-        <TextField id="ssn" layoutX="136.0" layoutY="77.0" prefHeight="27.0" prefWidth="214.0" />
-        <Button id="delete" layoutX="203.0" layoutY="307.0" mnemonicParsing="false" text="Delete" />
-        <Button id="update" layoutX="270.0" layoutY="307.0" mnemonicParsing="false" text="Update" />
-        <Button id="previous" layoutX="395.0" layoutY="77.0" mnemonicParsing="false" text="Previous" />
-        <Button id="next" layoutX="407.0" layoutY="115.0" mnemonicParsing="false" text="Next" />
-        <TextField id="dob" layoutX="136.0" layoutY="115.0" prefHeight="27.0" prefWidth="214.0" />
-        <TextField layoutX="136.0" layoutY="152.0" prefHeight="27.0" prefWidth="214.0" />
-        <TextField id="address" layoutX="136.0" layoutY="189.0" prefHeight="27.0" prefWidth="214.0" />
-        <TextField id="salary" layoutX="136.0" layoutY="225.0" prefHeight="27.0" prefWidth="214.0" />
-        <TextField id="gender" layoutX="136.0" layoutY="260.0" prefHeight="27.0" prefWidth="214.0" />
-        <Label layoutX="170.0" layoutY="33.0" text="Employee Details">
-            <font>
-                <Font size="18.0" />
-            </font>
-        </Label>
-        <Label layoutX="54.0" layoutY="82.0" text="SSn" />
-        <Label layoutX="54.0" layoutY="120.0" text="DOB" />
-        <Label layoutX="54.0" layoutY="157.0" text="Name" />
-        <Label layoutX="54.0" layoutY="194.0" text="Address" />
-        <Label layoutX="54.0" layoutY="230.0" text="Salary" />
-        <Label layoutX="54.0" layoutY="265.0" text="Gender" />
+        <Button fx:id="button" layoutX="93.0" layoutY="273.0" onAction="#handleButtonAction" text="Add" />
+        <TextField fx:id="ssnTxt" layoutX="93.0" layoutY="55.0" prefHeight="27.0" prefWidth="315.0" />
+        <TextField fx:id="dobText" layoutX="93.0" layoutY="93.0" prefHeight="27.0" prefWidth="315.0" />
+        <TextField fx:id="nameTxt" layoutX="93.0" layoutY="130.0" prefHeight="27.0" prefWidth="315.0" />
+        <TextField fx:id="addressTxt" layoutX="93.0" layoutY="165.0" prefHeight="27.0" prefWidth="315.0" />
+        <TextField fx:id="salaryTxt" layoutX="93.0" layoutY="201.0" prefHeight="27.0" prefWidth="315.0" />
+        <TextField fx:id="genderTxt" layoutX="93.0" layoutY="237.0" prefHeight="27.0" prefWidth="315.0" />
+        <Button fx:id="deleteBtn" layoutX="144.0" layoutY="273.0" mnemonicParsing="false" text="Delete" />
+        <Button fx:id="updateBtn" layoutX="211.0" layoutY="273.0" mnemonicParsing="false" text="Update" />
+        <Button fx:id="previousBtn" layoutX="415.0" layoutY="55.0" mnemonicParsing="false" text="Previous" />
+        <Button fx:id="nextBtn" layoutX="415.0" layoutY="93.0" mnemonicParsing="false" text="Next" />
+        <Button fx:id="clearBtn" layoutX="415.0" layoutY="237.0" mnemonicParsing="false" text="Clear" />
+        <Label layoutX="35.0" layoutY="60.0" text="SSn" />
+        <Label layoutX="35.0" layoutY="98.0" text="DOB" />
+        <Label layoutX="35.0" layoutY="135.0" text="Name" />
+        <Label layoutX="35.0" layoutY="170.0" text="Address" />
+        <Label layoutX="35.0" layoutY="206.0" text="Salary" />
+        <Label layoutX="35.0" layoutY="242.0" text="Gender" />
+        <Label layoutX="198.0" layoutY="24.0" text="Employee Details" />
     </children>
 </AnchorPane>

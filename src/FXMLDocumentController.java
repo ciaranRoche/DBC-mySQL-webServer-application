@@ -3,8 +3,7 @@ import java.util.ResourceBundle;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
-import javafx.scene.control.Button;
-import javafx.scene.control.Label;
+import javafx.scene.control.TextField;
 
 /**
  *
@@ -13,16 +12,11 @@ import javafx.scene.control.Label;
 public class FXMLDocumentController implements Initializable {
 
     @FXML
-    private Label label;
-    @FXML
-    private Button button;
-    @FXML
-    private Button delete;
+    private TextField ssnTxt;
 
     @FXML
     private void handleButtonAction(ActionEvent event) {
-        System.out.println("You clicked add!");
-        label.setText("Hello World!");
+        System.out.println("You clicked me!" + ssnTxt.getText());
     }
 
     @Override
