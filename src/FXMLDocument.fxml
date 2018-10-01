@@ -9,9 +9,9 @@
 
 <AnchorPane id="AnchorPane" prefHeight="368.0" prefWidth="500.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="FXMLDocumentController">
     <children>
-        <Button fx:id="button" layoutX="93.0" layoutY="273.0" onAction="#handleButtonAction" text="Add" />
+        <Button fx:id="addBtn" layoutX="93.0" layoutY="273.0" onAction="#handleAddAction" text="Add" />
         <TextField fx:id="ssnTxt" layoutX="93.0" layoutY="55.0" prefHeight="27.0" prefWidth="315.0" />
-        <TextField fx:id="dobText" layoutX="93.0" layoutY="93.0" prefHeight="27.0" prefWidth="315.0" />
+        <TextField fx:id="dobTxt" layoutX="93.0" layoutY="93.0" prefHeight="27.0" prefWidth="315.0" />
         <TextField fx:id="nameTxt" layoutX="93.0" layoutY="130.0" prefHeight="27.0" prefWidth="315.0" />
         <TextField fx:id="addressTxt" layoutX="93.0" layoutY="165.0" prefHeight="27.0" prefWidth="315.0" />
         <TextField fx:id="salaryTxt" layoutX="93.0" layoutY="201.0" prefHeight="27.0" prefWidth="315.0" />

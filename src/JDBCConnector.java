@@ -1,6 +1,7 @@
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
+import java.sql.Statement;
 import java.util.Properties;
 
 public class JDBCConnector {
@@ -31,5 +32,16 @@ public class JDBCConnector {
         conn = DriverManager.getConnection("jdbc:mysql://" + this.serverName + ":" + this.portNumber + "/" + this.dbName, connectionProps);
 
         return conn;
+    }
+
+    public void addRecord(String ssn, String dob, String name, String address, int salary, String gender) throws SQLException {
+        Statement stmt = getConnection().createStatement();
+
+        String sqlInsert = "INSERT INTO Employee VALUES ('" + ssn + "','" + dob + "','" + name + "','" + address + "'," + salary + ",'" + gender + "')";
+
+        stmt.executeUpdate(sqlInsert);
+
+        stmt.close();
+
     }
 }
