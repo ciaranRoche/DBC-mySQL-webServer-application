@@ -4,6 +4,8 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
 
+import java.sql.SQLException;
+
 /**
  *
  * @author ciaranroche
@@ -24,6 +26,14 @@ public class EmployeeSql extends Application {
      * @param args the command line arguments
      */
     public static void main(String[] args) {
+        System.out.println("hello");
+        JDBCConnector jdbc = new JDBCConnector();
+        try {
+            jdbc.getConnection();
+            System.out.println("Connected to database");
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
         launch(args);
     }
 
