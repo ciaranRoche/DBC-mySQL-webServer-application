@@ -16,8 +16,8 @@
         <TextField fx:id="addressTxt" layoutX="93.0" layoutY="165.0" prefHeight="27.0" prefWidth="315.0" />
         <TextField fx:id="salaryTxt" layoutX="93.0" layoutY="201.0" prefHeight="27.0" prefWidth="315.0" />
         <TextField fx:id="genderTxt" layoutX="93.0" layoutY="237.0" prefHeight="27.0" prefWidth="315.0" />
-        <Button fx:id="deleteBtn" layoutX="144.0" layoutY="273.0" mnemonicParsing="false" text="Delete" />
-        <Button fx:id="updateBtn" layoutX="211.0" layoutY="273.0" mnemonicParsing="false" text="Update" />
+        <Button fx:id="deleteBtn" layoutX="144.0" layoutY="273.0" mnemonicParsing="false" onAction="#handleDeleteAction" text="Delete" />
+        <Button fx:id="updateBtn" layoutX="211.0" layoutY="273.0" mnemonicParsing="false" onAction="#handleUpdateAction" text="Update" />
         <Button fx:id="previousBtn" layoutX="415.0" layoutY="55.0" mnemonicParsing="false" onAction="#handlePreviousAction" text="Previous" />
         <Button fx:id="nextBtn" layoutX="415.0" layoutY="93.0" mnemonicParsing="false" onAction="#handleNextAction" text="Next" />
         <Button fx:id="clearBtn" layoutX="415.0" layoutY="237.0" mnemonicParsing="false" onAction="#handleClearAction" text="Clear" />

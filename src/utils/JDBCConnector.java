@@ -1,10 +1,7 @@
 package utils;
 
-import model.Employee;
-
 import java.sql.*;
-import java.util.ArrayList;
-import java.util.List;
+
 import java.util.Properties;
 
 public class JDBCConnector {
@@ -37,39 +34,13 @@ public class JDBCConnector {
         return conn;
     }
 
-    public void addRecord(String ssn, String dob, String name, String address, int salary, String gender) throws SQLException {
-        Statement stmt = getConnection().createStatement();
-        String sqlInsert = "INSERT INTO Employee VALUES ('" + ssn + "','" + dob + "','" + name + "','" + address + "'," + salary + ",'" + gender + "')";
-        stmt.executeUpdate(sqlInsert);
-        stmt.close();
 
-    }
-
-    public void deleteRecord(){
-        // todo delete record
-    }
-
-    public void updateRecord(){
-        // todo update record
-    }
-
-    public List getRecords() throws SQLException{
-        Statement stmt = getConnection().createStatement();
+    public ResultSet getRecords() throws SQLException{
+        Statement stmt = getConnection().createStatement(ResultSet.TYPE_SCROLL_SENSITIVE,
+                ResultSet.CONCUR_UPDATABLE);
         String sqlGet = "SELECT * FROM Employee";
         stmt.executeQuery(sqlGet);
         ResultSet rs = stmt.getResultSet();
-        List<Employee> employees = new ArrayList<Employee>();
-        while(rs.next()){
-            String ssn = rs.getString("ssn");
-            String dob = rs.getString("dob");
-            String name = rs.getString("name");
-            String address = rs.getString("address");
-            int salary = rs.getInt("salary");
-            String gender = rs.getString("gender");
-
-            Employee employee = new Employee(ssn, dob, name, address, salary, gender);
-            employees.add(employee);
-        }
-        return employees;
+        return rs;
     }
 }

@@ -3,13 +3,12 @@ package controller;
 import java.net.URL;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.util.List;
+import java.util.Objects;
 import java.util.ResourceBundle;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.TextField;
-import model.Employee;
 import utils.JDBCConnector;
 
 /**
@@ -36,40 +35,51 @@ public class FXMLDocumentController implements Initializable {
     @FXML
     private TextField genderTxt;
 
-    private int record = 0;
-
-    private List<Employee> set;
-
     JDBCConnector conn = new JDBCConnector();
 
+    ResultSet set;
+
     @FXML
-    private void handleAddAction(ActionEvent event) {
-        try {
-            conn.addRecord(ssnTxt.getText(), dobTxt.getText(), nameTxt.getText(), addressTxt.getText(), Integer.parseInt(salaryTxt.getText()), genderTxt.getText());
-        } catch (SQLException e) {
-            e.printStackTrace();
+    private void handleAddAction(ActionEvent event) throws SQLException {
+        set.moveToInsertRow();
+        set.updateString("ssn", ssnTxt.getText());
+        set.updateString("dob", dobTxt.getText());
+        set.updateString("name", nameTxt.getText());
+        set.updateString("address", addressTxt.getText());
+        set.updateInt("salary", Integer.parseInt(salaryTxt.getText()));
+        set.updateString("gender", genderTxt.getText());
+        set.insertRow();
+    }
+
+    @FXML
+    private void handlePreviousAction(ActionEvent event) throws SQLException {
+        if(set.previous()){
+            setText(set.getString(
+                    "ssn"),
+                    set.getString("dob"),
+                    set.getString("name"),
+                    set.getString("address"),
+                    set.getInt("salary"),
+                    set.getString("gender"));
         }
     }
 
     @FXML
-    private void handlePreviousAction(ActionEvent event){
-        if (record != 0){
-            --record;
-            Employee employee = set.get(record);
-            setText(employee.getSsn(), employee.getDob(), employee.getName(), employee.getAddress(), employee.getSalary(), employee.getGender());
+    private void handleNextAction(ActionEvent event) throws SQLException {
+        if(set.next()){
+            setText(set.getString(
+                    "ssn"),
+                    set.getString("dob"),
+                    set.getString("name"),
+                    set.getString("address"),
+                    set.getInt("salary"),
+                    set.getString("gender"));
         }
     }
 
     @FXML
-    private void handleNextAction(ActionEvent event){
-        if (record < (set.size() - 1))
-            ++record;
-            Employee employee = set.get(record);
-            setText(employee.getSsn(), employee.getDob(), employee.getName(), employee.getAddress(), employee.getSalary(), employee.getGender());
-    }
-
-    @FXML
-    private void handleClearAction(ActionEvent event){
+    private void handleClearAction(ActionEvent event) throws SQLException {
+        set.isBeforeFirst();
         ssnTxt.clear();
         dobTxt.clear();
         nameTxt.clear();
@@ -79,8 +89,22 @@ public class FXMLDocumentController implements Initializable {
     }
 
     @FXML
-    private void handleUpdateAction(ActionEvent event){
+    private void handleUpdateAction(ActionEvent event) throws SQLException {
+        if(Objects.equals(ssnTxt.getText().toLowerCase(), set.getString("ssn").toLowerCase())) {
+            set.updateString("ssn", ssnTxt.getText());
+            set.updateString("dob", dobTxt.getText());
+            set.updateString("name", nameTxt.getText());
+            set.updateString("address", addressTxt.getText());
+            set.updateInt("salary", Integer.parseInt(salaryTxt.getText()));
+            set.updateString("gender", genderTxt.getText());
+            set.updateRow();
+        }
+    }
 
+    @FXML
+    private void handleDeleteAction(ActionEvent event) throws SQLException {
+        set.deleteRow();
+        getRecords();
     }
 
     @FXML
@@ -97,9 +121,22 @@ public class FXMLDocumentController implements Initializable {
     public void initialize(URL url, ResourceBundle rb) {
         try {
             set = conn.getRecords();
-            if (set.size() != 0){
-                Employee employee = set.get(0);
-                setText(employee.getSsn(), employee.getDob(), employee.getName(), employee.getAddress(), employee.getSalary(), employee.getGender());
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        getRecords();
+    }
+
+    public void getRecords(){
+        try {
+            if(set.next()){
+                setText(set.getString(
+                        "ssn"),
+                        set.getString("dob"),
+                        set.getString("name"),
+                        set.getString("address"),
+                        set.getInt("salary"),
+                        set.getString("gender"));
             }
         } catch (SQLException e) {
             e.printStackTrace();
