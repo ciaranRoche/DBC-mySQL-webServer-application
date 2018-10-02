@@ -3,11 +3,13 @@ package controller;
 import java.net.URL;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.List;
 import java.util.ResourceBundle;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.TextField;
+import model.Employee;
 import utils.JDBCConnector;
 
 /**
@@ -57,13 +59,12 @@ public class FXMLDocumentController implements Initializable {
 
     @FXML
     private void handleClearAction(ActionEvent event){
-        // TODO
-    }
-
-    @FXML
-    private void handleTextUpdate(ActionEvent event) throws SQLException {
-        ResultSet set = conn.getRecords();
-
+        ssnTxt.clear();
+        dobTxt.clear();
+        nameTxt.clear();
+        addressTxt.clear();
+        salaryTxt.clear();
+        genderTxt.clear();
     }
 
     @FXML
@@ -79,22 +80,14 @@ public class FXMLDocumentController implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         try {
-            ResultSet set = conn.getRecords();
-            if (set.first()){
-                setText(
-                        set.getString("ssn"),
-                        set.getString("dob"),
-                        set.getString("name"),
-                        set.getString("address"),
-                        set.getInt("salary"),
-                        set.getString("gender")
-                );
+            List set = conn.getRecords();
+            if (set.size() != 0){
+                Employee employee = (Employee) set.get(0);
+                setText(employee.getSsn(), employee.getDob(), employee.getName(), employee.getAddress(), employee.getSalary(), employee.getGender());
             }
         } catch (SQLException e) {
             e.printStackTrace();
         }
     }
-
-
 
 }
