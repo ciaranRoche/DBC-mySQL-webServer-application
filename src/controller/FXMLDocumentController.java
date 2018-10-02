@@ -36,6 +36,10 @@ public class FXMLDocumentController implements Initializable {
     @FXML
     private TextField genderTxt;
 
+    private int record = 0;
+
+    private List<Employee> set;
+
     JDBCConnector conn = new JDBCConnector();
 
     @FXML
@@ -49,12 +53,19 @@ public class FXMLDocumentController implements Initializable {
 
     @FXML
     private void handlePreviousAction(ActionEvent event){
-        // TODO
+        if (record != 0){
+            --record;
+            Employee employee = set.get(record);
+            setText(employee.getSsn(), employee.getDob(), employee.getName(), employee.getAddress(), employee.getSalary(), employee.getGender());
+        }
     }
 
     @FXML
     private void handleNextAction(ActionEvent event){
-        // TODO
+        if (record < (set.size() - 1))
+            ++record;
+            Employee employee = set.get(record);
+            setText(employee.getSsn(), employee.getDob(), employee.getName(), employee.getAddress(), employee.getSalary(), employee.getGender());
     }
 
     @FXML
@@ -65,6 +76,11 @@ public class FXMLDocumentController implements Initializable {
         addressTxt.clear();
         salaryTxt.clear();
         genderTxt.clear();
+    }
+
+    @FXML
+    private void handleUpdateAction(ActionEvent event){
+
     }
 
     @FXML
@@ -80,9 +96,9 @@ public class FXMLDocumentController implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         try {
-            List set = conn.getRecords();
+            set = conn.getRecords();
             if (set.size() != 0){
-                Employee employee = (Employee) set.get(0);
+                Employee employee = set.get(0);
                 setText(employee.getSsn(), employee.getDob(), employee.getName(), employee.getAddress(), employee.getSalary(), employee.getGender());
             }
         } catch (SQLException e) {
