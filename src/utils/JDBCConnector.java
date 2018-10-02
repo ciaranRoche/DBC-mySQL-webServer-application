@@ -1,3 +1,5 @@
+package utils;
+
 import java.sql.*;
 import java.util.Properties;
 
@@ -52,6 +54,7 @@ public class JDBCConnector {
         String sqlGet = "SELECT * FROM Employee";
         stmt.executeQuery(sqlGet);
         ResultSet rs = stmt.getResultSet();
+
         while (rs.next()){
             String ssnVal = rs.getString("ssn");
             String dobVal = rs.getString("dob");
