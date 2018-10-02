@@ -35,9 +35,9 @@ public class FXMLDocumentController implements Initializable {
     @FXML
     private TextField genderTxt;
 
-    JDBCConnector conn = new JDBCConnector();
+    private JDBCConnector conn = new JDBCConnector();
 
-    ResultSet set;
+    private ResultSet set;
 
     @FXML
     private void handleAddAction(ActionEvent event) throws SQLException {
@@ -66,15 +66,13 @@ public class FXMLDocumentController implements Initializable {
 
     @FXML
     private void handleNextAction(ActionEvent event) throws SQLException {
-        if(set.next()){
-            setText(set.getString(
-                    "ssn"),
-                    set.getString("dob"),
-                    set.getString("name"),
-                    set.getString("address"),
-                    set.getInt("salary"),
-                    set.getString("gender"));
-        }
+        if(set.next()) setText(set.getString(
+                "ssn"),
+                set.getString("dob"),
+                set.getString("name"),
+                set.getString("address"),
+                set.getInt("salary"),
+                set.getString("gender"));
     }
 
     @FXML
@@ -127,7 +125,7 @@ public class FXMLDocumentController implements Initializable {
         getRecords();
     }
 
-    public void getRecords(){
+    private void getRecords(){
         try {
             if(set.next()){
                 setText(set.getString(
