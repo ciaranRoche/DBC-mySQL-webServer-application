@@ -1,7 +1,4 @@
-import java.sql.Connection;
-import java.sql.DriverManager;
-import java.sql.SQLException;
-import java.sql.Statement;
+import java.sql.*;
 import java.util.Properties;
 
 public class JDBCConnector {
@@ -36,11 +33,35 @@ public class JDBCConnector {
 
     public void addRecord(String ssn, String dob, String name, String address, int salary, String gender) throws SQLException {
         Statement stmt = getConnection().createStatement();
-
         String sqlInsert = "INSERT INTO Employee VALUES ('" + ssn + "','" + dob + "','" + name + "','" + address + "'," + salary + ",'" + gender + "')";
-
         stmt.executeUpdate(sqlInsert);
+        stmt.close();
 
+    }
+
+    public void deleteRecord(){
+        // todo delete record
+    }
+
+    public void updateRecord(){
+        // todo update record
+    }
+
+    public void getRecords() throws SQLException{
+        Statement stmt = getConnection().createStatement();
+        String sqlGet = "SELECT * FROM Employee";
+        stmt.executeQuery(sqlGet);
+        ResultSet rs = stmt.getResultSet();
+        while (rs.next()){
+            String ssnVal = rs.getString("ssn");
+            String dobVal = rs.getString("dob");
+            String nameVal = rs.getString("name");
+            String addressVal = rs.getString("address");
+            String salaryVal = rs.getString("salary");
+            String genderVal = rs.getString("gender");
+            System.out.println(ssnVal + " " + dobVal + " " + nameVal + " " + addressVal + " " + salaryVal + " " + genderVal);
+        }
+        rs.close();
         stmt.close();
 
     }
