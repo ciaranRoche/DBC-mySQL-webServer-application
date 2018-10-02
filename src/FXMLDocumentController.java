@@ -39,7 +39,31 @@ public class FXMLDocumentController implements Initializable {
         } catch (SQLException e) {
             e.printStackTrace();
         }
+    }
 
+    @FXML
+    private void handlePreviousAction(ActionEvent event){
+        // TODO
+    }
+
+    @FXML
+    private void handleNextAction(ActionEvent event){
+        // TODO
+    }
+
+    @FXML
+    private void handleClearAction(ActionEvent event){
+        // TODO
+    }
+
+    @FXML
+    private void setText(String ssn, String dob, String name, String address, int salary, String gender){
+        ssnTxt.setText(ssn);
+        dobTxt.setText(dob);
+        nameTxt.setText(name);
+        addressTxt.setText(address);
+        salaryTxt.setText(String.valueOf(salary));
+        genderTxt.setText(gender);
     }
 
     @Override

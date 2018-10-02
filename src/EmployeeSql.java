@@ -26,9 +26,7 @@ public class EmployeeSql extends Application {
     /**
      * @param args the command line arguments
      */
-    public static void main(String[] args) {
-        System.out.println("hello");
-
+    public static void main(String[] args) throws SQLException {
         JDBCConnector jdbc = new JDBCConnector();
         try {
             jdbc.getConnection();
@@ -36,6 +34,7 @@ public class EmployeeSql extends Application {
         } catch (SQLException e) {
             e.printStackTrace();
         }
+        jdbc.getRecords();
         launch(args);
     }
 
