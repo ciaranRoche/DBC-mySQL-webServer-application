@@ -1,6 +1,10 @@
 package utils;
 
+import model.Employee;
+
 import java.sql.*;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Properties;
 
 public class JDBCConnector {
@@ -49,11 +53,23 @@ public class JDBCConnector {
         // todo update record
     }
 
-    public ResultSet getRecords() throws SQLException{
+    public List getRecords() throws SQLException{
         Statement stmt = getConnection().createStatement();
         String sqlGet = "SELECT * FROM Employee";
         stmt.executeQuery(sqlGet);
         ResultSet rs = stmt.getResultSet();
-        return rs;
+        List<Employee> employees = new ArrayList<Employee>();
+        while(rs.next()){
+            String ssn = rs.getString("ssn");
+            String dob = rs.getString("dob");
+            String name = rs.getString("name");
+            String address = rs.getString("address");
+            int salary = rs.getInt("salary");
+            String gender = rs.getString("gender");
+
+            Employee employee = new Employee(ssn, dob, name, address, salary, gender);
+            employees.add(employee);
+        }
+        return employees;
     }
 }
