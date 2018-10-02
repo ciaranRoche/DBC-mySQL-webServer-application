@@ -1,6 +1,7 @@
 package controller;
 
 import java.net.URL;
+import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ResourceBundle;
 import javafx.event.ActionEvent;
@@ -60,6 +61,12 @@ public class FXMLDocumentController implements Initializable {
     }
 
     @FXML
+    private void handleTextUpdate(ActionEvent event) throws SQLException {
+        ResultSet set = conn.getRecords();
+
+    }
+
+    @FXML
     private void setText(String ssn, String dob, String name, String address, int salary, String gender){
         ssnTxt.setText(ssn);
         dobTxt.setText(dob);
@@ -71,7 +78,21 @@ public class FXMLDocumentController implements Initializable {
 
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-        // TODO
+        try {
+            ResultSet set = conn.getRecords();
+            if (set.first()){
+                setText(
+                        set.getString("ssn"),
+                        set.getString("dob"),
+                        set.getString("name"),
+                        set.getString("address"),
+                        set.getInt("salary"),
+                        set.getString("gender")
+                );
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
     }
 
 

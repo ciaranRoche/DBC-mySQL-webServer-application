@@ -49,23 +49,11 @@ public class JDBCConnector {
         // todo update record
     }
 
-    public void getRecords() throws SQLException{
+    public ResultSet getRecords() throws SQLException{
         Statement stmt = getConnection().createStatement();
         String sqlGet = "SELECT * FROM Employee";
         stmt.executeQuery(sqlGet);
         ResultSet rs = stmt.getResultSet();
-
-        while (rs.next()){
-            String ssnVal = rs.getString("ssn");
-            String dobVal = rs.getString("dob");
-            String nameVal = rs.getString("name");
-            String addressVal = rs.getString("address");
-            String salaryVal = rs.getString("salary");
-            String genderVal = rs.getString("gender");
-            System.out.println(ssnVal + " " + dobVal + " " + nameVal + " " + addressVal + " " + salaryVal + " " + genderVal);
-        }
-        rs.close();
-        stmt.close();
-
+        return rs;
     }
 }
