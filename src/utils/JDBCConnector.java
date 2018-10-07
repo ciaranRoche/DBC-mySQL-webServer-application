@@ -4,6 +4,9 @@ import java.sql.*;
 
 import java.util.Properties;
 
+/*
+Sets up a JDBC connection
+ */
 public class JDBCConnector {
 
 
@@ -23,6 +26,9 @@ public class JDBCConnector {
     private final String dbName = "assignmentDB";
 
 
+    /*
+    Returns a connection to the database
+     */
     public Connection getConnection() throws SQLException {
         Connection conn;
         Properties connectionProps = new Properties();
@@ -34,7 +40,9 @@ public class JDBCConnector {
         return conn;
     }
 
-
+    /*
+    Returns ResultSet of records from database
+     */
     public ResultSet getRecords() throws SQLException{
         Statement stmt = getConnection().createStatement(ResultSet.TYPE_SCROLL_SENSITIVE,
                 ResultSet.CONCUR_UPDATABLE);

@@ -8,6 +8,9 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.Objects;
 
+/*
+MainFrame class, generates and controls Java Swing Main Frame
+ */
 public class MainFrame extends JFrame implements ActionListener {
 
     private JFrame frame;
@@ -35,6 +38,9 @@ public class MainFrame extends JFrame implements ActionListener {
 
     private ResultSet set;
 
+    /*
+    Constructs MainFrame components
+     */
     public MainFrame() throws SQLException {
         frame = new JFrame();
         frame.setVisible(true);
@@ -126,11 +132,14 @@ public class MainFrame extends JFrame implements ActionListener {
         previousBtn.addActionListener(this);
         nextBtn.addActionListener(this);
 
+        // gets records and populates textfields
         getRecords();
     }
 
+    /*
+    Handles action, calling a handler based on action
+     */
     public void actionPerformed(ActionEvent e) {
-        System.out.println("boop" + ssnTxt.getText() + " " + e.getActionCommand());
         String action = e.getActionCommand();
         switch (action) {
             case "Clear":
@@ -175,6 +184,9 @@ public class MainFrame extends JFrame implements ActionListener {
     }
 
 
+    /*
+    Gets records from connection and sets textfields
+     */
     private void getRecords() throws SQLException {
         set = conn.getRecords();
         if (set.next()) {
@@ -188,6 +200,9 @@ public class MainFrame extends JFrame implements ActionListener {
         }
     }
 
+    /*
+    Gets next record from result set and sets textfields
+     */
     private void handleNext() throws SQLException {
         if(set.next()) setText(set.getString(
                 "ssn"),
@@ -198,6 +213,9 @@ public class MainFrame extends JFrame implements ActionListener {
                 set.getString("gender"));
     }
 
+    /*
+    Checks if primary keys are equal and then updates record
+     */
     private void handleUpdate() throws SQLException {
         if(Objects.equals(ssnTxt.getText().toLowerCase(), set.getString("ssn").toLowerCase())) {
             set.updateString("ssn", ssnTxt.getText());
@@ -210,6 +228,9 @@ public class MainFrame extends JFrame implements ActionListener {
         }
     }
 
+    /*
+    gets previous record from result set
+     */
     private void handlePrevious() throws SQLException {
         if(set.previous()){
             setText(set.getString(
@@ -222,6 +243,9 @@ public class MainFrame extends JFrame implements ActionListener {
         }
     }
 
+    /*
+    Moves to insert row in result set and inserts new record
+     */
     private void handleAdd() throws SQLException {
         set.moveToInsertRow();
         set.updateString("ssn", ssnTxt.getText());
@@ -233,11 +257,17 @@ public class MainFrame extends JFrame implements ActionListener {
         set.insertRow();
     }
 
+    /*
+    Deletes current row and recalls records from result set
+     */
     private void handleDelete() throws SQLException {
         set.deleteRow();
         getRecords();
     }
 
+    /*
+    Moves to empty row in result set and clears text fields
+     */
     private void handleClear(){
         try {
             set.isBeforeFirst();
@@ -252,6 +282,9 @@ public class MainFrame extends JFrame implements ActionListener {
         genderTxt.setText("");
     }
 
+    /*
+    Sets text fields
+     */
     private void setText(String ssn, String dob, String name, String address, int salary, String gender){
         ssnTxt.setText(ssn);
         dobTxt.setText(dob);

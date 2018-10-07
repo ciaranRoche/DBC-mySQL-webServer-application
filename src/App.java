@@ -5,13 +5,14 @@ import javax.swing.*;
 import java.sql.SQLException;
 
 /**
- *
  * @author ciaranroche
  */
 public class App {
 
 
     /**
+     * Creates a JDBC connection, creates ResultSet of Records
+     * Creates a new MainFrame
      * @param args the command line arguments
      */
     public static void main(String[] args) throws SQLException {
